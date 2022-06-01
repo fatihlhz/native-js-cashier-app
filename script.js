@@ -45,14 +45,22 @@ function add() {
 }
 
 function editItem(id) {
-    var newItem = prompt("Edit", itemData[id]);
-    itemData[id] = newItem;
+    var newItem = prompt("Input the new item:", itemData[id]);
+    if (newItem === null) {
+        newItem = itemData[id]
+    } else {
+        itemData[id] = newItem;
+    }
     showTable();
 }
 
 function editPrice(id) {
-    var newPrice = prompt("Edit", priceData[id]);
-    priceData[id] = newPrice;
+    var newPrice = prompt("Input the new price:", priceData[id]);
+    if (newPrice === null) {
+        newPrice = priceData[id];
+    } else {
+        priceData[id] = newPrice;
+    }
     showTable();
 }
 
