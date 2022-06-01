@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Javascript Cashier</title>
+</head>
+<body>
+  <div class="box">
+        <h1>Native Javascript Cashier App</h1>
+        
+        <table id="table"></table>
+        <table id="tableTwo">
+          <tr>
+            <th width="601.5px">Add Item</th>
+            <th>Payment Process</th>
+          </tr>
+          <tr>
+            <td>
+              <div class="container">
+                <input class="form-add" type="text" name="item" placeholder="input Item..." />
+                <input class="form-add" type="text" name="price" placeholder="input Price..." />
+              </div>
+              <button class="btn-add" onclick="add()">Add Item</button>
+            </td>
+            <td>
+              <div class="row">
+                <div class="column-left">
+                  <input type="text" class="form-process" id="item-total" placeholder="Item Total : 0 Items" disabled/>
+                </div>
+                <div class="column-right">
+                    <input type="text" class="form-process" id="discount-total" placeholder="Discount Total : 0%" disabled/>
+                </div>
+              </div>
+              <div class="row">
+                <div class="column-left">
+                  <input type="text" class="form-process" id="discount-value" placeholder="Discount Value : Rp0,-" disabled/>
+                </div>
+                <div class="column-right">
+                    <input type="text" class="form-process" id="price-total" placeholder="Price Total : Rp0,-" disabled/>
+                </div>
+              </div>
+              <button class="btn-add" onclick="process()">Process</button>
+            </td>
+          </tr>
+        </table>
+  </div>
+    <script src="script.js"></script>
+</body>
+</html>
