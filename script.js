@@ -66,6 +66,7 @@ function editPrice(id) {
 
 function remove(id) {
     itemData.pop(id);
+    priceData.pop(id);
     showTable();
 }
 
