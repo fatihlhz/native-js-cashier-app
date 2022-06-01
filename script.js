@@ -1,5 +1,4 @@
-// Array Database
-
+// itemData Database
 var itemData = [
     "Silverqueen",
     "Ice Cream",
@@ -14,8 +13,9 @@ var priceData = [
     2000
 ];
 
+// CRUD FUNCTION
 
-
+// Read Function
 function showTable() {
     var tabel = document.getElementById("table");
     tabel.innerHTML = "<tr><th>No</th><th>Item</th><th>Price</th><th width= '10%'>Count</th><th width= '30%'>Action</th></tr>";
@@ -28,7 +28,9 @@ function showTable() {
         tabel.innerHTML += "<tr><td>" + j + "</td><td>" + itemData[i] + "</td><td>" + priceData[i] + "</td><td>"+ countTemp +"</td><td>" + btnEdit + "   " + btnEditPrice + "   " + btnDelete + "</tr>";
     }
 }
+showTable();
 
+// Create Function
 function add() {
     var inputItem = document.querySelector("input[name=item]").value;
     var inputPrice = document.querySelector("input[name=price]").value;
@@ -44,6 +46,7 @@ function add() {
     
 }
 
+// Update Function
 function editItem(id) {
     var newItem = prompt("Input the new item:", itemData[id]);
     if (newItem === null) {
@@ -64,12 +67,27 @@ function editPrice(id) {
     showTable();
 }
 
+// Delete Function
 function remove(id) {
     itemData.pop(id);
     priceData.pop(id);
     showTable();
 }
 
+// CASHIER FUNCTION
+
+// Count Total Item
+function itemCount() {
+    let count = 0;
+    let countTemp;
+    for (let i = 0; i < itemData.length; i++) {
+        countTemp = Number(document.getElementById(`item${i}`).value);
+        count += countTemp;
+    }
+    return count
+}
+
+// Count Discount Percentage
 function discPercent(totalPrice) {
     let discount = 0;
     if (totalPrice >= 250000) {
@@ -86,35 +104,42 @@ function discPercent(totalPrice) {
     return discount;
 }
 
+// Count Discount Value
 function discPrice(totalPrice, discount) {
     return totalPrice * (discount/100);
 }
 
-function finalTotal(totalPrice, discountPrice) {
-    return totalPrice - discountPrice;
-}
-
-function process() {
+// Count Total Price
+function totPrice() {
     let priceTemp;
     let countTemp;
-    let itemCount = 0;
     let totalPrice = 0
     for(let i = 0; i < itemData.length; i++) {
         priceTemp = Number(priceData[i]);
         countTemp = Number(document.getElementById(`item${i}`).value);
-        itemCount += countTemp;
         totalPrice += priceTemp * countTemp;
     }
-    let discPercentage = discPercent(totalPrice);
-    let discValue = discPrice(totalPrice, discPercentage);
-    let finalPrice = finalTotal(totalPrice, discValue)
+    return totalPrice;
+}
+ 
+// Count Final Price
+function finalTotal(totalPrice, discountPrice) {
+    return totalPrice - discountPrice;
+}
 
-    // Tampil element
-    document.getElementById('item-total').value = `Item Total : ${itemCount} Items`;
+// Execute All Function
+function process() {
+
+    const totalPrice = totPrice();
+    const count = itemCount();
+    const discPercentage = discPercent(totalPrice);
+    const discValue = discPrice(totalPrice, discPercentage);
+    const finalPrice = finalTotal(totalPrice, discValue)
+
+    // Show the element 
+    document.getElementById('item-total').value = `Item Total : ${count} Items`;
     document.getElementById('discount-total').value = `Discount Total : ${discPercentage}%`;
     document.getElementById('discount-value').value = `Discount Value : Rp${discValue},-`
     document.getElementById('price-total').value = `Price Total : Rp${finalPrice},-`;
 }
 
-
-showTable();
